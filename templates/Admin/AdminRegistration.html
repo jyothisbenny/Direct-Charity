@@ -1,0 +1,24 @@
+{% extends "Admin/base.html" %}
+
+{% block content %}
+<h2> Create New Account </h2>
+
+<form  method="POST">
+	{% csrf_token %}
+	<input type="email" name="email" placeholder="email" required><br>
+	<input type="password" name="password1" placeholder="Password" required><br>
+	<input type="password" name="password2" placeholder="Confirm Password" required><br>
+
+	<div><button>Register</button>
+<h4 class="pull-right"><br><br>Have an account?  <a href="{% url 'admin_login_url' %}" class="text-primary">Login</a>
+</h4></div>
+
+</form>
+<div>
+	<h3>
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	</h3>
+</div>
+{% endblock %}
