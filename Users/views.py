@@ -59,7 +59,7 @@ def user_login(request):
                         return redirect('user_otpVerify_url')
 
                 else:
-                    return redirect('user_registration_url')
+                    return redirect('user_home_url')
         if flag == 0:
             messages.info(request, 'invalid username and password')
             return redirect('user_login_url')
@@ -76,6 +76,8 @@ def user_otpverify(request):
         user = UsersProfile.objects.get(pk=pk)
         if int(user_entry) == user.otp:
             print("hey")
+            user.phone_verified = True
+            user.save()
             return redirect('user_home_url')
         else:
             messages.info(request, "invalid otp please type the 6 digit otp")
