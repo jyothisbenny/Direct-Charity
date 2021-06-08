@@ -1,0 +1,21 @@
+{% extends "User/base.html" %}
+
+{% block content %}
+<h2> Verify phone</h2>
+
+<form  method="POST">
+	{% csrf_token %}
+	<input type="text" name="userentry" placeholder=" Enter OTP "><br>
+	<div><button>verify phone </button>
+<h4 class="pull-right"><br><br>Have an account?  <a href="{% url 'user_login_url' %}" class="text-primary">Login</a>
+</h4></div>
+
+</form>
+<div>
+	<h3>
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	</h3>
+</div>
+{% endblock %}
