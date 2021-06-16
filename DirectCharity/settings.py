@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'DirectCharity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DirectCharity',
+        'NAME': 'DirectCharity16',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost'
@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'Users.UsersProfile'
+AUTH_USER_MODEL = 'Users.MyUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

@@ -7,6 +7,8 @@ client = Client(account_sid, auth_token)
 
 
 def send_sms(otp, phone):
+    phone = "+91" + phone
+
     message = client.messages.create(
         body=f'Hi there! this is your One Time Password {otp}',
         from_='+1 210 981 4291',

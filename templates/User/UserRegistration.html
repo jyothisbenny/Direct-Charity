@@ -2,38 +2,44 @@
 
 {% block content %}
 <h2> Create New Account </h2>
-
 <form  method="POST">
 	{% csrf_token %}
-	
+
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
 		<label for="validationServer01">First name</label>
-		<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>
-		
+		<!--<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>-->
+		{{ register_form.first_name}}
+		{{ register_form.first_name.errors}}
 		</div>
 		<div class="col-md-4 mb-3">
 		<label for="validationServer02">Last name</label>
-		<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>
-		
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="col-md-4 mb-3">
-		<label for="inputEmail4">Email</label>
-		<div class="input-group">
-      		<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>
-		</div>
+		<!--<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>-->
+		{{ register_form.last_name}}
+		{{ register_form.last_name.errors}}
 		</div>
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
 		<label for="inputEmail4">Username</label>
 		<div class="input-group">
-      		<input type="text" class="form-control" id="inputEmail4" placeholder="Username" name="username" required>
+			{{ register_form.username}}
+			{{ register_form.username.errors}}
+      		<!--<input type="text" class="form-control" id="inputEmail4" placeholder="Username" name="username" required>-->
 		</div>
 		</div>
 	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+		<label for="inputEmail4">Email</label>
+		<div class="input-group">
+			{{ register_form.email}}
+			{{ register_form.email.errors }}
+      		<!--<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>-->
+		</div>
+		</div>
+	</div>
+
 	<div class="form-row">
 		<div class="col-md-1 mb-3">
 			<label for="validationCustom01">Country code</label>
@@ -41,21 +47,27 @@
 			</div>
 			<div class="col-md-4 mb-3">
 			<label for="validationCustom02">Phone No</label>
-			<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>
+				{{ register_form.phone}}
+				{{ register_form.phone.errors}}
+			<!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
 			</div>
 		</br>
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
 			<label for="inputPassword5">Password</label>
-			<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password1" required>
+			{{ register_form.password1}}
+			{{ register_form.password1.errors}}
+			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password1" required>-->
 			<small id="passwordHelpBlock" class="form-text text-muted">
 			please try to create a complicated password!, which includes both letters,numbers and special characters
 			</small>
 		</div>	
 		<div class="col-md-4 mb-3">
-			<label for="inputPassword5">Re-Enter Password</label>
-			<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password2" required>
+			<label for="inputPassword5"> Confirm password</label>
+			{{ register_form.password2}}
+			{{ register_form.password2.errors}}
+			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password2" required>-->
 			<small id="passwordHelpBlock" class="form-text text-muted">
 			Enter the same password
 			</small>
@@ -82,4 +94,14 @@
 		</label>
 	</div>
 </form>
-{% endblock %}
+<div>
+	<h5>Have an Account <a href="{% url 'user_login_url' %}">Login</a> </h5>
+</div>
+<!--{% if form.errors %}-->
+<!--    {% for field in form %}-->
+<!--        {% for error in field.errors %}-->
+<!--            <p> {{ error }} </p>-->
+<!--        {% endfor %}-->
+<!--    {% endfor %}-->
+<!--{% endif %}-->
+<!--{% endblock %}-->
