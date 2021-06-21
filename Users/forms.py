@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from .models import MyUser
+
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -45,11 +45,11 @@ class NewUserForm(UserCreationForm):
                                 error_messages={
                                     'required': 'Please enter a password with Capital letters, small letters and numbers'})
 
-    def clean_email(self, *args, **kwargs):
-        email = self.cleaned_data['email']
-        if MyUser.objects.filter(email="email").exists():
-            raise forms.ValidationError(_("This email address is already in use. Please supply a different email address."))
-        return email
+    # def clean_email(self, *args, **kwargs):
+    #     email = self.cleaned_data['email']
+    #     if MyUser.objects.filter(email="email").exists():
+    #         raise forms.ValidationError(_("This email address is already in use. Please supply a different email address."))
+    #     return email
 
     class Meta:
         model = MyUser

@@ -1,0 +1,119 @@
+{% extends "Patients/base.html" %}
+
+{% block content %}
+
+<form  method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	</br>
+	<h2>  Request for a help </h2>
+	</br>
+
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+		<label>Patient name</label>
+		<!--<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>-->
+		{{ PatientRequest_Form.patient_name}}
+		{{ PatientRequest_Form.patient_name.errors}}
+		</div>
+
+		<div class="col-md-4 mb-3">
+		<label>Requesting For</label>
+		<!--<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>-->
+		{{ PatientRequest_Form.relationship}}
+		{{ PatientRequest_Form.relationship.errors}}
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+		<label>Disease Name</label>
+		<div class="input-group">
+			{{ PatientRequest_Form.disease}}
+			{{ PatientRequest_Form.disease.errors}}
+      		<!--<input type="text" class="form-control" id="inputEmail4" placeholder="Username" name="username" required>-->
+		</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+		<label>Category</label>
+		<div class="input-group">
+			{{ PatientRequest_Form.category}}
+			{{ PatientRequest_Form.category.errors }}
+      		<!--<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>-->
+		</div>
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+			<label>Description</label>
+			<div class="input-group">
+			{{ PatientRequest_Form.description}}
+			{{ PatientRequest_Form.description.errors }}
+      		<!--<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>-->
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+			<label>Documents</label>
+				{{ PatientRequest_Form.documents}}
+				{{ PatientRequest_Form.documents.errors}}
+				<small  class="form-text text-muted">
+					please try to upload valid files. if files are not clear, request wort be approved. And also provide details about the money needed
+				</small>
+			<!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+			</div>
+		</br>
+	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+			<label>Hospital</label>
+			{{ PatientRequest_Form.hospital}}
+			{{ PatientRequest_Form.hospital.errors}}
+			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password1" required>-->
+
+		</div>
+	<div class="col-md-4 mb-3">
+			<label>Consulting Doctor Name</label>
+			{{ PatientRequest_Form.doctor_name}}
+			{{ PatientRequest_Form.doctor_name.errors}}
+			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password2" required>-->
+
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+			<label>Required Amount</label>
+				{{ PatientRequest_Form.required_amount}}
+				{{ PatientRequest_Form.required_amount.errors}}
+			<!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+			</div>
+		</br>
+	</div>
+
+	<div class="form-row">
+		<div class="form-check">
+		<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+
+		<label class="form-check-label" for="invalidCheck3">
+			Agree to terms and conditions
+		</label>
+		<div class="invalid-feedback">
+			You must agree before submitting.
+		</div>
+		</div>
+	</div>
+  	<button class="btn btn-primary" type="submit">Request</button>
+	</br>
+	<div class="form-row">
+		<label class="form-check-label" for="invalidCheck3">
+			{% for message in messages %}
+			{{ message }}
+			{% endfor %}
+		</label>
+	</div>
+</form>
+
+</div>
+{% endblock %}

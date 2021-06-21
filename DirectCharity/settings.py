@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AdminApp',
-    'Users'
+    'Users',
+    'Patients'
+
+
 ]
 
 MIDDLEWARE = [
@@ -79,7 +82,7 @@ WSGI_APPLICATION = 'DirectCharity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DirectCharity16',
+        'NAME': 'DirectCharity17',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost'
@@ -129,3 +132,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

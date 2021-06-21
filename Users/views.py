@@ -46,7 +46,7 @@ from .forms import NewUserForm
 def user_registration(request):
     args = {}
     if request.method == "POST":
-        form = NewUserForm(request.POST)
+        form = NewUserForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -117,6 +117,8 @@ def LogoutView(request):
     return redirect('user_login_url')
 
 
-@login_required()
+@login_required(login_url='user_login_url')
 def user_home(request):
     return render(request, 'User/UserHome.html')
+
+

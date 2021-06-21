@@ -1,19 +1,21 @@
-{% extends "User/base.html" %}
+{% extends "User/base_authentication.html" %}
 
 {% block content %}
-<h2> Create New Account </h2>
+
 <form  method="POST">
 	{% csrf_token %}
-
+	</br>
+	<h2> Sign Up </h2>
+	</br>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label for="validationServer01">First name</label>
+		<label>First name</label>
 		<!--<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>-->
 		{{ register_form.first_name}}
 		{{ register_form.first_name.errors}}
 		</div>
 		<div class="col-md-4 mb-3">
-		<label for="validationServer02">Last name</label>
+		<label>Last name</label>
 		<!--<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>-->
 		{{ register_form.last_name}}
 		{{ register_form.last_name.errors}}
@@ -21,7 +23,7 @@
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label for="inputEmail4">Username</label>
+		<label>Username</label>
 		<div class="input-group">
 			{{ register_form.username}}
 			{{ register_form.username.errors}}
@@ -31,7 +33,7 @@
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label for="inputEmail4">Email</label>
+		<label>Email</label>
 		<div class="input-group">
 			{{ register_form.email}}
 			{{ register_form.email.errors }}
@@ -42,11 +44,11 @@
 
 	<div class="form-row">
 		<div class="col-md-1 mb-3">
-			<label for="validationCustom01">Country code</label>
+			<label>Country code</label>
 			<input class="form-control" id="disabledInput" type="text" placeholder="+91" disabled>
 			</div>
 			<div class="col-md-4 mb-3">
-			<label for="validationCustom02">Phone No</label>
+			<label>Phone</br>No</label>
 				{{ register_form.phone}}
 				{{ register_form.phone.errors}}
 			<!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
@@ -55,7 +57,7 @@
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-			<label for="inputPassword5">Password</label>
+			<label>Password</label>
 			{{ register_form.password1}}
 			{{ register_form.password1.errors}}
 			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password1" required>-->
@@ -64,7 +66,7 @@
 			</small>
 		</div>	
 		<div class="col-md-4 mb-3">
-			<label for="inputPassword5"> Confirm password</label>
+			<label> Confirm password</label>
 			{{ register_form.password2}}
 			{{ register_form.password2.errors}}
 			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password2" required>-->
@@ -77,6 +79,7 @@
 		<div class="form-check">
 		<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
 		<label class="form-check-label" for="invalidCheck3">
+
 			Agree to terms and conditions
 		</label>
 		<div class="invalid-feedback">
@@ -94,9 +97,10 @@
 		</label>
 	</div>
 </form>
-<div>
+<div class="d-flex justify-content-end">
 	<h5>Have an Account <a href="{% url 'user_login_url' %}">Login</a> </h5>
 </div>
+{% endblock %}
 <!--{% if form.errors %}-->
 <!--    {% for field in form %}-->
 <!--        {% for error in field.errors %}-->
@@ -104,4 +108,4 @@
 <!--        {% endfor %}-->
 <!--    {% endfor %}-->
 <!--{% endif %}-->
-<!--{% endblock %}-->
+
