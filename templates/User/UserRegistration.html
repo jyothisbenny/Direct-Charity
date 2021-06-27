@@ -2,43 +2,43 @@
 
 {% block content %}
 
-<form  method="POST">
+<form method="POST">
 	{% csrf_token %}
 	</br>
 	<h2> Sign Up </h2>
 	</br>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label>First name</label>
-		<!--<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>-->
-		{{ register_form.first_name}}
-		{{ register_form.first_name.errors}}
+			<label>First name</label>
+			<!--<input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" name="first_name" required>-->
+			{{ register_form.first_name}}
+			{{ register_form.first_name.errors}}
 		</div>
 		<div class="col-md-4 mb-3">
-		<label>Last name</label>
-		<!--<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>-->
-		{{ register_form.last_name}}
-		{{ register_form.last_name.errors}}
+			<label>Last name</label>
+			<!--<input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" name="last_name" required>-->
+			{{ register_form.last_name}}
+			{{ register_form.last_name.errors}}
 		</div>
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label>Username</label>
-		<div class="input-group">
-			{{ register_form.username}}
-			{{ register_form.username.errors}}
-      		<!--<input type="text" class="form-control" id="inputEmail4" placeholder="Username" name="username" required>-->
-		</div>
+			<label>Username</label>
+			<div class="input-group">
+				{{ register_form.username}}
+				{{ register_form.username.errors}}
+				<!--<input type="text" class="form-control" id="inputEmail4" placeholder="Username" name="username" required>-->
+			</div>
 		</div>
 	</div>
 	<div class="form-row">
 		<div class="col-md-4 mb-3">
-		<label>Email</label>
-		<div class="input-group">
-			{{ register_form.email}}
-			{{ register_form.email.errors }}
-      		<!--<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>-->
-		</div>
+			<label>Email</label>
+			<div class="input-group">
+				{{ register_form.email}}
+				{{ register_form.email.errors }}
+				<!--<input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>-->
+			</div>
 		</div>
 	</div>
 
@@ -46,13 +46,13 @@
 		<div class="col-md-1 mb-3">
 			<label>Country code</label>
 			<input class="form-control" id="disabledInput" type="text" placeholder="+91" disabled>
-			</div>
-			<div class="col-md-4 mb-3">
+		</div>
+		<div class="col-md-4 mb-3">
 			<label>Phone</br>No</label>
-				{{ register_form.phone}}
-				{{ register_form.phone.errors}}
+			{{ register_form.phone}}
+			{{ register_form.phone.errors}}
 			<!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
-			</div>
+		</div>
 		</br>
 	</div>
 	<div class="form-row">
@@ -61,33 +61,33 @@
 			{{ register_form.password1}}
 			{{ register_form.password1.errors}}
 			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password1" required>-->
-			<small id="passwordHelpBlock" class="form-text text-muted">
-			please try to create a complicated password!, which includes both letters,numbers and special characters
+			<small class="form-text text-muted">
+				please try to create a complicated password!, which includes both letters,numbers and special characters
 			</small>
-		</div>	
+		</div>
 		<div class="col-md-4 mb-3">
 			<label> Confirm password</label>
 			{{ register_form.password2}}
 			{{ register_form.password2.errors}}
 			<!--<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password2" required>-->
 			<small id="passwordHelpBlock" class="form-text text-muted">
-			Enter the same password
+				Enter the same password
 			</small>
 		</div>
 	</div>
 	<div class="form-row">
 		<div class="form-check">
-		<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-		<label class="form-check-label" for="invalidCheck3">
+			<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+			<label class="form-check-label" for="invalidCheck3">
 
-			Agree to terms and conditions
-		</label>
-		<div class="invalid-feedback">
-			You must agree before submitting.
-		</div>
+				Agree to terms and conditions
+			</label>
+			<div class="invalid-feedback">
+				You must agree before submitting.
+			</div>
 		</div>
 	</div>
-  	<button class="btn btn-primary" type="submit">Register</button>
+	<button class="btn btn-primary" type="submit">Register</button>
 	</br>
 	<div class="form-row">
 		<label class="form-check-label" for="invalidCheck3">
@@ -98,9 +98,10 @@
 	</div>
 </form>
 <div class="d-flex justify-content-end">
-	<h5>Have an Account <a href="{% url 'user_login_url' %}">Login</a> </h5>
+	<h5>Have an Account <a href="{% url 'user_login_url' %}">Login</a></h5>
 </div>
 {% endblock %}
+
 <!--{% if form.errors %}-->
 <!--    {% for field in form %}-->
 <!--        {% for error in field.errors %}-->

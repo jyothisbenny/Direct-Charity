@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import MyUser
+from Patients.models import Patients
 from .utils import send_sms
 import random
 
@@ -10,38 +11,6 @@ from django.contrib.auth.models import User, auth
 
 from .forms import NewUserForm
 
-
-# Create your views here.
-
-# # registration
-# def user_registration(request):
-#     if request.method == "POST":
-#         first_name = request.POST['first_name']
-#         last_name = request.POST['last_name']
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         phone = request.POST['phone']
-#         password1 = request.POST['password1']
-#         password2 = request.POST['password2']
-#         phone1= "+91" + phone
-#         if password1 == password2:
-#             if MyUser.objects.filter(email=email).exists():
-#                 messages.info(request, 'email already exists')
-#                 return redirect('user_registration_url')
-#             elif MyUser.objects.filter(username=username).exists():
-#                 messages.info(request, 'username already taken, try another one')
-#                 return redirect('user_registration_url')
-#             elif MyUser.objects.filter(phone=phone).exists():
-#                 messages.info(request, 'phone number already exists, try login')
-#                 return redirect('user_registration_url')
-#             else:
-#                 User = MyUser.objects.create(first_name=first_name, last_name=last_name, username=username,
-#                                                    email=email, phone=phone1, password=password2)
-#                 User.save()
-#                 return redirect('user_login_url')
-#         else:
-#             messages.info(request, "password not matching")
-#     return render(request, "User/UserRegistration.html")
 
 def user_registration(request):
     args = {}
@@ -119,6 +88,7 @@ def LogoutView(request):
 
 @login_required(login_url='user_login_url')
 def user_home(request):
-    return render(request, 'User/UserHome.html')
+    User_requests = Patients.objects.filter(admin_verified=True)
+    return render(request, 'User/UserHome.html', {'user_requests': User_requests})
 
 

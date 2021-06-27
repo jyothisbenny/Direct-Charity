@@ -1,5 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-<h2> Home22222 </h2>
-<h4><a href=" {% url 'user_logout_url' %}">logout</a></h4>
+
+
+<div class="row">
+    {% for x in user_requests %}
+    <div class="d-flex">
+        <div class="card p-4 bg-white">
+            <div class="about-product text-center mt-2"><img src="{{ x.patient_photo.url }}" width="300" height="200">
+                <div>
+                    <h4></h4>
+                    <h4 class="mt-0 text-black-50">{{ x.patient_name }}</h4>
+                </div>
+            </div>
+            <div class="stats mt-2">
+                <div class="d-flex justify-content-between p-price"><span>Disease</span><span>{{ x.disease }}</span>
+                </div>
+                <div class="d-flex justify-content-between p-price"><span>Hospital</span><span>{{ x.hospital }}</span>
+                </div>
+                <div class="d-flex justify-content-between p-price">
+                    <span>Doctor Name</span><span>{{ x.doctor_name }}</span></div>
+
+                <p><a href="{{x.documents.url}}">Click here to view the documents</a></p>
+                <div class="d-flex justify-content-between p-price"><span>Required Amount</span><span>{{ x.required_amount }}Rs</span>
+                </div>
+                <div class="d-flex justify-content-between p-price"><span>Collected Amount</span><span>{{ x.collected_amount }}Rs</span>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-center total font-weight-bold mt-4"><a href="#" class="btn btn-primary">Donate
+                Now</a></div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:"4" %}
+</div>
+<div class="row">
+    {% endif %}
+    {% endfor %}
+
 {% endblock %}

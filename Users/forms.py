@@ -29,7 +29,8 @@ class NewUserForm(UserCreationForm):
                                error_messages={'required': 'username already taken'})
 
     phone = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                         'placeholder': 'please enter your 10 digit phone number',  'maxlength': '10'}),
+                                                                         'placeholder': 'please enter your 10 digit phone number',
+                                                                         'maxlength': '10'}),
                             error_messages={'required': 'Please enter your 10 digit phone number',
                                             'unique': 'phone no already registered, try login'})
 

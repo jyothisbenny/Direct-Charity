@@ -33,3 +33,5 @@ def patient_request(request):
     args['form'] = form.errors
     return render(request=request, template_name="Patients/patients_registration.html",
                   context={"PatientRequest_Form": form})
+
+
