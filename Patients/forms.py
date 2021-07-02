@@ -1,5 +1,5 @@
 from django import forms
-from .models import Relationships, Categories, Hospitals, Patients
+from .models import Relationship, Category, Hospital, Patient, Payment
 from django.forms import ModelChoiceField
 
 from django.core.exceptions import ValidationError
@@ -9,7 +9,7 @@ class RequestForm(forms.ModelForm):
     patient_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control is-valid',
                                                                                 'placeholder': 'patient name'}))
 
-    relationship = forms.ModelChoiceField(queryset=Relationships.objects.all(), empty_label=None, required=True,
+    relationship = forms.ModelChoiceField(queryset=Relationship.objects.all(), empty_label=None, required=True,
                                           widget=forms.Select(attrs={'class': 'form-control form-select',
                                                                      'placeholder': 'for'}),
                                           error_messages={'required': 'Please choose your option'})
@@ -19,18 +19,17 @@ class RequestForm(forms.ModelForm):
     disease = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
                                                                            'placeholder': 'Disease Name'}))
 
-    category = forms.ModelChoiceField(queryset=Categories.objects.all(), empty_label=None, required=True,
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None, required=True,
                                       widget=forms.Select(attrs={'class': 'form-control form-select'}),
                                       error_messages={'required': 'Please choose your option'})
 
     description = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control',
-                                                                              'placeholder': 'please enter some details about patient and hospital',
-                                                                              'maxlength': '200'}),
+                                                                              'placeholder': 'please enter some details about patient and hospital'}),
                                   error_messages={'required': 'Please enter some details about the patient'})
 
     documents = forms.FileField(help_text='max. 42 megabytes')
 
-    hospital = forms.ModelChoiceField(queryset=Hospitals.objects.all(), empty_label=None, required=True,
+    hospital = forms.ModelChoiceField(queryset=Hospital.objects.all(), empty_label=None, required=True,
                                       widget=forms.Select(attrs={'class': 'form-control form-select'}),
                                       error_messages={'required': 'Please choose your option'})
 
@@ -47,7 +46,7 @@ class RequestForm(forms.ModelForm):
                                                                                'placeholder': 'confirm UPI ID'}))
 
     class Meta:
-        model = Patients
+        model = Patient
         fields = (
             "patient_name", "relationship", "patient_photo", "disease", "category", "description", "documents",
             "hospital", "doctor_name", "required_amount", "upi_id")
@@ -61,3 +60,13 @@ class RequestForm(forms.ModelForm):
             self._errors['upi_id2'] = self.error_class(['upi ids not matching.'])
             del self.cleaned_data['upi_id2']
         return cleaned_data
+
+
+class PaymentForm(forms.ModelForm):
+    amount = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'class': 'form-control is-valid',
+                                                                             'placeholder': 'Enter amount Payed'}))
+    screenshot = forms.FileField(required=True, help_text='max. 42 megabytes')
+
+    class Meta:
+        model = Payment
+        fields = ("amount", "screenshot")

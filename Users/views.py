@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import MyUser
-from Patients.models import Patients
+from Patients.models import Patient
 from .utils import send_sms
 import random
 
@@ -19,7 +19,7 @@ def user_registration(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Registration successful.")
+            messages.success(request, "Registration successful!, Now please Login")
             return redirect("user_login_url")
         else:
             return render(request=request, template_name="User/UserRegistration.html", context={'register_form': form})
@@ -88,7 +88,7 @@ def LogoutView(request):
 
 @login_required(login_url='user_login_url')
 def user_home(request):
-    User_requests = Patients.objects.filter(admin_verified=True)
+    User_requests = Patient.objects.filter(admin_verified=True)
     return render(request, 'User/UserHome.html', {'user_requests': User_requests})
 
 

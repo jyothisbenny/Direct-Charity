@@ -1,4 +1,3 @@
-import os
 from twilio.rest import Client
 
 account_sid = 'AC838ae4615669dc8c39c858949bfcbe60'

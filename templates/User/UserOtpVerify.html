@@ -1,21 +1,49 @@
 {% extends "User/base_authentication.html" %}
 
 {% block content %}
-<h2> Verify phone</h2>
 
-<form  method="POST">
-	{% csrf_token %}
-	<input type="text" name="userentry" placeholder=" Enter OTP "><br>
-	<div><button>verify phone </button>
-<h4 class="pull-right"><br><br>Have an account?  <a href="{% url 'user_login_url' %}" class="text-primary">Login</a>
-</h4></div>
+<section class="min-vh-100">
+    <div class="container">
+        <div class="row text-white">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                <div class="px-2">
+                    <form method="POST" class="justify-content-center">
+                        {% csrf_token %}
+                        <br>
+                        <div class="text-center ">
+                            <div class="col-sm-12">
+                                <label for="exampleInputPassword1" class="form-label">Verify Phone</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="userentry"
+                                       placeholder=" Enter OTP "><br>
 
-</form>
-<div>
-	<h3>
-		{% for message in messages %}
-		{{ message }}
-		{% endfor %}
-	</h3>
-</div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Verify</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <div class="d-flex justify-content-end">-->
+<!--        <h5>Want to change phone no ? <a href="{% url 'user_registration_url' %}">click here</a></h5>-->
+<!--    </div>-->
+    </div>
+</section>
+
+
+<h3>
+    <div class="container">
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</h3>
 {% endblock %}

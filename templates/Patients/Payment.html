@@ -1,0 +1,77 @@
+{% extends "Patients/base.html" %}
+{% block content %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card p-4 bg-white">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <h5>UPI id</h5>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5>{{ patient.upi_id}}</h5>
+            </div>
+
+
+            <h6>Here is the upi id of the <b>{{patient.patient_name}},</b> you can pay the amount using any platform,
+                but please mention the
+                amount you payed and the details, Because this is how we trace tha amount collected</h6>
+            </br>
+
+            <h3>Needs {{need}}Rs more</h3>
+        </div>
+        </br>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+
+                <label>Amount Payed</label>
+                {{ Payment_Form.amount}}
+                {{ Payment_Form.amount.errors}}
+                <!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+            </div>
+            </br>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Screenshot of payment</label>
+                {{ Payment_Form.screenshot}}
+                {{ Payment_Form.screenshot.errors}}
+                <small class="form-text text-muted">
+                    upload a screenshot, supported formats jpg or jpeg
+                </small>
+                <!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+            </div>
+            </br>
+        </div>
+        <div class="form-row">
+		<div class="form-check">
+			<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+			<label class="form-check-label">
+				Agree to terms and conditions of Direct Charity
+			</label>
+			<div class="invalid-feedback">
+				You must agree before submitting.
+			</div>
+		</div>
+	</div>
+        <div class="form-row">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        <div >
+            </br>
+            <h4>
+                {% for message in messages %}
+                {% if message%}
+                    {{ message }}
+                    <h5><a class="nav-link" href="{% url 'user_home_url' %}">Go Back to Home</a></h5>
+                {% endif%}
+                {% endfor %}
+            </h4>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}

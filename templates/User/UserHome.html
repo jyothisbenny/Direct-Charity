@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-
 <div class="row">
     {% for x in user_requests %}
     <div class="d-flex">
@@ -15,12 +14,12 @@
             <div class="stats mt-2">
                 <div class="d-flex justify-content-between p-price"><span>Disease</span><span>{{ x.disease }}</span>
                 </div>
-                <div class="d-flex justify-content-between p-price"><span>Hospital</span><span>{{ x.hospital }}</span>
-                </div>
-                <div class="d-flex justify-content-between p-price">
-                    <span>Doctor Name</span><span>{{ x.doctor_name }}</span></div>
+<!--                <div class="d-flex justify-content-between p-price"><span>Hospital</span><span>{{ x.hospital }}</span>-->
+<!--                </div>-->
+<!--                <div class="d-flex justify-content-between p-price">-->
+<!--                    <span>Doctor Name</span><span>{{ x.doctor_name }}</span></div>-->
 
-                <p><a href="{{x.documents.url}}">Click here to view the documents</a></p>
+<!--                <p><a href="{{x.documents.url}}">Click here to view the documents</a></p>-->
                 <div class="d-flex justify-content-between p-price"><span>Required Amount</span><span>{{ x.required_amount }}Rs</span>
                 </div>
                 <div class="d-flex justify-content-between p-price"><span>Collected Amount</span><span>{{ x.collected_amount }}Rs</span>
@@ -28,8 +27,8 @@
 
             </div>
 
-            <div class="d-flex justify-content-center total font-weight-bold mt-4"><a href="#" class="btn btn-primary">Donate
-                Now</a></div>
+            <div class="d-flex justify-content-center total font-weight-bold mt-4"><a href="{% url 'request_readMore_url' x.id  %}"
+                                                                                      class="btn btn-primary">Read More</a></div>
         </div>
     </div>
     {% if forloop.counter|divisibleby:"4" %}
