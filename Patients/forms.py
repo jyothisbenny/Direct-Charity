@@ -1,5 +1,5 @@
 from django import forms
-from .models import Relationship, Category, Hospital, Patient, Payment
+from .models import Relationship, Category, Hospital, Patient, Payment, Report
 from django.forms import ModelChoiceField
 
 from django.core.exceptions import ValidationError
@@ -70,3 +70,14 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
         fields = ("amount", "screenshot")
+
+
+class ReportForm(forms.ModelForm):
+    description = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control is-valid',
+                                                                              'placeholder': 'Enter the reason for reporting'}))
+
+    documents = forms.FileField(required=True, help_text='max. 42 megabytes')
+
+    class Meta:
+        model = Report
+        fields = ("description", "documents")

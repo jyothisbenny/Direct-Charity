@@ -2,9 +2,10 @@ from django.db import models
 from django.conf import settings
 from .validators import validate_file_extension, validate_file_extension_of_pic
 
+from django.utils.timezone import now
+
 User = settings.AUTH_USER_MODEL
 
-from django.utils.timezone import now
 
 # Create your models here.
 
@@ -30,11 +31,11 @@ class Hospital(models.Model):
     state = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.hospital_name+", "+self.place+", "+self.district
+        return self.hospital_name + ", " + self.place + ", " + self.district
 
 
 class Patient(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     patient_name = models.CharField(max_length=30)
     relationship = models.ForeignKey(Relationship, on_delete=models.CASCADE)
     patient_photo = models.FileField(upload_to='Images/%Y/%m/%d', validators=[validate_file_extension_of_pic])
@@ -46,7 +47,7 @@ class Patient(models.Model):
     doctor_name = models.CharField(max_length=30)
     required_amount = models.IntegerField()
     upi_id = models.CharField(max_length=50)
-    collected_amount = models.IntegerField(null=True)
+    collected_amount = models.IntegerField(default=0)
     admin_verified = models.BooleanField(default=False)
     report_count = models.IntegerField(default=0)
 
@@ -58,3 +59,16 @@ class Payment(models.Model):
     date = models.DateField(default=now)
     screenshot = models.FileField(upload_to='PaymentProofs/%Y/%m/%d', validators=[validate_file_extension_of_pic])
     admin_verified = models.BooleanField(default=False)
+
+
+class Report(models.Model):
+    reporter = models.ForeignKey(User, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    description = models.CharField(max_length=400)
+    documents = models.FileField(upload_to='ReportDocuments/%Y/%m/%d', validators=[validate_file_extension])
+
+
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+

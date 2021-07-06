@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'DirectCharity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbb',
+        'NAME': 'dbb1',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost'

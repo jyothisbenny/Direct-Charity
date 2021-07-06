@@ -64,13 +64,11 @@ def user_login(request):
 def user_otpverify(request):
     if request.method == "POST":
         user_entry = request.POST['userentry']
-
         pk = request.session.get('pk')
         user = MyUser.objects.get(pk=pk)
         # print("-----------------------------", user.otp)
         # print("-----------------------------", user_entry)
         if int(user_entry) == int(user.otp):
-            print("hey")
             user.phone_verified = True
             user.save()
             return redirect('user_home_url')
@@ -88,7 +86,7 @@ def LogoutView(request):
 
 @login_required(login_url='user_login_url')
 def user_home(request):
-    User_requests = Patient.objects.filter(admin_verified=True)
+    User_requests = Patient.objects.filter(admin_verified=True).filter(report_count__lte=18)
     return render(request, 'User/UserHome.html', {'user_requests': User_requests})
 
 

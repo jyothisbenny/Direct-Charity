@@ -1,0 +1,66 @@
+{% extends "Patients/base.html" %}
+{% block content %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card p-4 bg-white">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <h5>Want to Report <b>{{ patient.patient_name}}?</b></h5>
+            </div>
+        </div>
+        <h6>Please don't make any false reports, These reports make affects to the patient.</h6>
+        </br>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+
+                <label>Reason For reporting</label>
+                {{ Report_Form.description}}
+                {{ Report_Form.description.errors}}
+                <!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+            </div>
+            </br>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Any proofs</label>
+                {{ Report_Form.documents}}
+                {{ Report_Form.documents.errors}}
+                <small class="form-text text-muted">
+                    upload any proofs, supported file format - pdf
+                </small>
+                <!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+            </div>
+            </br>
+        </div>
+        <div class="form-row">
+            <div class="form-check">
+                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                <label class="form-check-label">
+                    Agree to terms and conditions of Direct Charity
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        <div>
+            </br>
+            <h4>
+                {% for message in messages %}
+                {% if message%}
+                {{ message }}
+                <h5><a class="nav-link" href="{% url 'user_home_url' %}">Go Back to Home</a></h5>
+                {% endif%}
+                {% endfor %}
+            </h4>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}
