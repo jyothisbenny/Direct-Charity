@@ -9,7 +9,7 @@ def send_sms(otp, phone):
     phone = "+91" + phone
 
     message = client.messages.create(
-        body=f'Hi there! this is your One Time Password {otp}',
+        body=f'Hi there! You can use this OTP {otp} for verifying your DirectCharity Account',
         from_='+1 210 981 4291',
         to=f'{phone}'
     )

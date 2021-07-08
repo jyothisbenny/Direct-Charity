@@ -135,3 +135,14 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,vagrant
 eb-package.zip
 Users/migrations/
+
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64

@@ -2,39 +2,39 @@
 {% load static %}
 {% block content %}
 
-  <form method="POST" >
+<form method="POST">
     {% csrf_token %}
     <br>
-   <div class="text-center">
+    <div class="text-center">
         <div class="col-sm-4">
-          <i class="fas fa-user-shield"></i>
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-        </div>
-       <br>
-        <div class="col-sm-4">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            <i class="fas fa-user-shield"></i>
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
         </div>
         <br>
-   </div>
+        <div class="col-sm-4">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+        </div>
+        <br>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 
-  </form>
+</form>
 
 <h3>
-  <div class="container">
-    <div class="form-group">
-		{% if messages %}
-		<ul class="messages">
-			{% for message in messages %}
-				 {{ message }}
-			{% endfor %}
-		</ul>
-		{% endif %}
-	</div>
-  </div>
+    <div class="container">
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
 </h3>
 
 {% endblock %}

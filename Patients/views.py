@@ -122,7 +122,7 @@ def message(request):
     #             print("+++++++++++++++++elif", m.patient_id)
     #             Message.objects.create(user=request.user, patient_id=k.id)
     #             return render(request, 'Patients/Messages.html', {'patients': pat})
-    dict={}
+    dict = {}
     """getting payments made by the login ed user"""
     pay = Payment.objects.filter(donor=request.user.id)
     for i in pay:

@@ -7,4 +7,4 @@ urlpatterns = [
     path('otpverify/', views.user_otpverify, name="user_otpVerify_url"),
     path('userhome/', views.user_home, name="user_home_url"),
     path('logout/', views.LogoutView, name="user_logout_url"),
-    ]
+]

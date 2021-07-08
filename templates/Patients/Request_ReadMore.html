@@ -74,15 +74,15 @@
             <a href="{% url 'payment_url' patient.id  %}" class="btn btn-primary">Donate Now</a>
         </div>
 
-    </br>
-            <h4>
-                {% for message in messages %}
-                {% if message%}
-                <div>{{ message }}</div>
-                {% endif%}
-                {% endfor %}
-            </h4>
-</div>
+        </br>
+        <h4>
+            {% for message in messages %}
+            {% if message%}
+            <div>{{ message }}</div>
+            {% endif%}
+            {% endfor %}
+        </h4>
+    </div>
 </div>
 
 

@@ -88,5 +88,3 @@ def LogoutView(request):
 def user_home(request):
     User_requests = Patient.objects.filter(admin_verified=True).filter(report_count__lte=18)
     return render(request, 'User/UserHome.html', {'user_requests': User_requests})
-
-

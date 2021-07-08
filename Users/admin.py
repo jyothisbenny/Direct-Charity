@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    
+
     class Meta:
         model = MyUser
         fields = ('email', 'username')
@@ -67,7 +67,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('first_name','last_name','email', 'username','phone', 'password1', 'password2'),
+            'fields': ('first_name', 'last_name', 'email', 'username', 'phone', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)
