@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import MyUser
-from Patients.models import Patient
+from Patients.models import Patient, SuccessStories
 from .utils import send_sms
 import random
 
@@ -10,6 +10,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 
 from .forms import NewUserForm
+from django.contrib.auth import logout
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 def user_registration(request):
@@ -81,10 +86,23 @@ def user_otpverify(request):
 
 def LogoutView(request):
     auth.logout(request)
-    return redirect('user_login_url')
+    return redirect('index_url')
 
 
-@login_required(login_url='user_login_url')
+@login_required()
 def user_home(request):
+    patients = Patient.objects.all()
+    for i in patients:
+        if i.collected_amount >= i.required_amount:
+            print("-------------------------how you doing")
+            SuccessStories.objects.create(owner=i.owner, patient_name=i.patient_name, relationship=i.relationship,
+                                          patient_photo=i.patient_photo, disease=i.disease, category=i.category,
+                                          description=i.description, documents=i.documents, hospital=i.hospital,
+                                          doctor_name=i.doctor_name, required_amount=i.required_amount,
+                                          upi_id=i.upi_id, collected_amount=i.collected_amount, admin_verified=i.admin_verified,
+                                          report_count=i.report_count)
+            i.delete()
+
     User_requests = Patient.objects.filter(admin_verified=True).filter(report_count__lte=18)
+    print(type(User_requests))
     return render(request, 'User/UserHome.html', {'user_requests': User_requests})

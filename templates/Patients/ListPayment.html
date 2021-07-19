@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for i in payments%}
+<ul class="list-group list-group-flush">
+    {{i.patient_name}}
+    {{i.paymet.amount}}
+<!--    {% for j in i %}-->
+<!--    {{i.patient_name}}{{j.amount}}-->
+<!--    {% endfor %}-->
+    </li>
+</ul>
+{% endfor %}
+
+{% endblock %}

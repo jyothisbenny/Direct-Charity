@@ -59,6 +59,7 @@ class Payment(models.Model):
     date = models.DateField(default=now)
     screenshot = models.FileField(upload_to='PaymentProofs/%Y/%m/%d', validators=[validate_file_extension_of_pic])
     admin_verified = models.BooleanField(default=False)
+    user_verified = models.BooleanField(default=False)
 
 
 class Report(models.Model):
@@ -71,3 +72,21 @@ class Report(models.Model):
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+
+
+class SuccessStories(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    patient_name = models.CharField(max_length=30)
+    relationship = models.ForeignKey(Relationship, on_delete=models.CASCADE)
+    patient_photo = models.FileField(upload_to='Images/%Y/%m/%d', validators=[validate_file_extension_of_pic])
+    disease = models.CharField(max_length=50)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    description = models.CharField(max_length=400)
+    documents = models.FileField(upload_to='documents/%Y/%m/%d', validators=[validate_file_extension])
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+    doctor_name = models.CharField(max_length=30)
+    required_amount = models.IntegerField()
+    upi_id = models.CharField(max_length=50)
+    collected_amount = models.IntegerField(default=0)
+    admin_verified = models.BooleanField(default=False)
+    report_count = models.IntegerField(default=0)

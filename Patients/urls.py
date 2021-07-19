@@ -9,4 +9,5 @@ urlpatterns = [
                   path('payment/<int:id>', views.payment, name="payment_url"),
                   path('report/<int:id>', views.report, name="report_url"),
                   path('messages/', views.message, name="message_url"),
+                  path('list_payments/', views.listPaymentsForApprove, name="list_payment_url"),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

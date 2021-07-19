@@ -108,28 +108,33 @@ def report(request, id):
                   context={'Report_Form': form, "patient": req})
 
 
+@login_required(login_url='user_login_url')
 def message(request):
-    # mes = Message.objects.filter(user=request.user.id)
-    # pay = Payment.objects.filter(donor=request.user.id)
-    # for i in pay:
-    #     pat = Patient.objects.filter(id=i.patient.id).filter(report_count__gte=1)
-    #     print("$$$$$$$$$$$$$$$$$$$$$$", pat)
-    # for k in pat:
-    #     for m in mes:
-    #         if m.patient_id == k.id:
-    #             print("+++++++++++++++++if", m.patient_id)
-    #         else:
-    #             print("+++++++++++++++++elif", m.patient_id)
-    #             Message.objects.create(user=request.user, patient_id=k.id)
-    #             return render(request, 'Patients/Messages.html', {'patients': pat})
     dict = {}
     """getting payments made by the login ed user"""
     pay = Payment.objects.filter(donor=request.user.id)
     for i in pay:
         """getting patients where reported by more than 5 users"""
-        pat = Patient.objects.filter(id=i.patient.id).filter(report_count__gte=4)
+        pat = Patient.objects.filter(id=i.patient.id).filter(report_count__gte=2)
         if pat:
             dict[i] = pat
         # print("$$$$$$$$$$$$$$$$$$$$$$", pat)
     print("++++++++++", dict)
     return render(request, 'Patients/Messages.html', {'patients': dict})
+
+
+def listPaymentsForApprove(request):
+    dict1 = {}
+    """getting patient requests made by the login ed user"""
+    pat = Patient.objects.filter(owner=request.user.id)
+    for i in pat:
+        """getting all the payments are made for the patients"""
+        pay = Payment.objects.filter(patient_id=i.id)
+        for j in pay:
+            print("------------------------hey-------", j)
+            print("-----------------hello----------------")
+            dict1[i] = j
+    # print("$$$$$$$$$$$$$$$$$$$$$$", pat)
+
+    print("++++++++++", dict1)
+    return render(request, "Patients/ListPayment.html", {'payments': dict1})
