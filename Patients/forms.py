@@ -63,13 +63,26 @@ class RequestForm(forms.ModelForm):
 
 
 class PaymentForm(forms.ModelForm):
-    amount = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'class': 'form-control is-valid',
-                                                                             'placeholder': 'Enter amount Payed'}))
+    amount = forms.IntegerField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control is-valid',
+                                                                                 'placeholder': 'Enter amount Payed'}))
+    confirm_amount = forms.IntegerField(required=True,
+                                        widget=forms.PasswordInput(attrs={'class': 'form-control is-valid',
+                                                                          'placeholder': 'Enter amount Payed'}))
     screenshot = forms.FileField(required=True, help_text='max. 42 megabytes')
 
     class Meta:
         model = Payment
         fields = ("amount", "screenshot")
+
+    def clean(self):
+        cleaned_data = super(PaymentForm, self).clean()
+        amount = cleaned_data.get("amount")
+        confirm_amount = cleaned_data.get("confirm_amount")
+
+        if amount != confirm_amount:
+            self._errors['confirm_amount'] = self.error_class(['amounts are not matching.'])
+            del self.cleaned_data['confirm_amount']
+        return cleaned_data
 
 
 class ReportForm(forms.ModelForm):

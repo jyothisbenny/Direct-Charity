@@ -35,6 +35,16 @@
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
+
+                <label>Confirm Amount</label>
+                {{ Payment_Form.confirm_amount}}
+                {{ Payment_Form.confirm_amount.errors}}
+                <!--<input type="text" class="form-control" placeholder="Enter your 10 digit mobile no" maxlength="10" name="phone" required>-->
+            </div>
+            </br>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
                 <label>Screenshot of payment</label>
                 {{ Payment_Form.screenshot}}
                 {{ Payment_Form.screenshot.errors}}
