@@ -1,8 +1,8 @@
 from twilio.rest import Client
+from decouple import config
 
-account_sid = 'AC838ae4615669dc8c39c858949bfcbe60'
-auth_token = 'a6fe90246c9783e7ee0e6567950afc43'
-client = Client(account_sid, auth_token)
+
+client = Client(config("TWILIO_ACCOUNT_SID"), config("TWILIO_AUTH_ID"))
 
 
 def send_sms(otp, phone):
