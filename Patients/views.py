@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from .models import Patient, Report, Payment, Message
+from .models import Patient, Report, Payment, SuccessStories
 from .forms import RequestForm, PaymentForm, ReportForm
 from django.contrib import messages
 from django.conf import settings
@@ -109,7 +109,7 @@ def report(request, id):
 
 
 @login_required(login_url='user_login_url')
-def message(request):
+def notifications(request):
     dict = {}
     """getting payments made by the login ed user"""
     pay = Payment.objects.filter(donor=request.user.id)
@@ -118,7 +118,14 @@ def message(request):
         pat = Patient.objects.filter(id=i.patient.id).filter(report_count__gte=2)
         if pat:
             dict[i] = pat
-        # print("$$$$$$$$$$$$$$$$$$$$$$", pat)
+
+    pay2 = Payment.objects.filter(donor=request.user.id)
+    for j in pay2:
+        """getting patients where reported by more than 5 users"""
+        pat2 = SuccessStories.objects.filter(id=j.patient.id).filter(report_count__gte=2)
+        if pat2:
+            dict[j] = pat2
+
     print("++++++++++", dict)
     return render(request, 'Patients/Messages.html', {'patients': dict})
 
@@ -138,3 +145,8 @@ def listPaymentsForApprove(request):
 
     print("++++++++++", dict1)
     return render(request, "Patients/ListPayment.html", {'payments': dict1})
+
+
+def successStories(request):
+    success_stories = SuccessStories.objects.filter(admin_verified=True)
+    return render(request, 'Patients/successStories.html', {'success_stories': success_stories})

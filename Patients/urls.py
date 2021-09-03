@@ -8,6 +8,8 @@ urlpatterns = [
                   path('request_readMore/<int:id>', views.request_readMore, name="request_readMore_url"),
                   path('payment/<int:id>', views.payment, name="payment_url"),
                   path('report/<int:id>', views.report, name="report_url"),
-                  path('messages/', views.message, name="message_url"),
+                  path('Notifications/', views.notifications, name="message_url"),
                   path('list_payments/', views.listPaymentsForApprove, name="list_payment_url"),
+                  path('success_stories/', views.successStories, name="success_stories_url"),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

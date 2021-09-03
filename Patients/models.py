@@ -51,6 +51,9 @@ class Patient(models.Model):
     admin_verified = models.BooleanField(default=False)
     report_count = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.patient_name
+
 
 class Payment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)

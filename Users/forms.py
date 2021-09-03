@@ -29,22 +29,25 @@ class NewUserForm(UserCreationForm):
                                error_messages={'required': 'username already taken'})
 
     phone = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                         'placeholder': 'please enter your 10 digit phone number',
+                                                                         'placeholder': 'please enter your 10 digit '
+                                                                                        'phone number',
                                                                          'maxlength': '10'}),
                             error_messages={'required': 'Please enter your 10 digit phone number',
                                             'unique': 'phone no already registered, try login'})
 
     password1 = forms.CharField(required=True,
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'inputEmail4',
-                                                              'placeholder': 'Enter password'}),
+                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'inputEmail4',
+                                                                  'placeholder': 'Enter password'}),
                                 error_messages={
-                                    'required': 'Please enter a password with Capital letters, small letters and numbers'})
+                                    'required': "Please enter a password with Capital letters, small letters and "
+                                                "numbers"})
 
     password2 = forms.CharField(required=True,
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'inputEmail4',
-                                                              'placeholder': 'Retype the same password'}),
+                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'inputEmail4',
+                                                                  'placeholder': 'Retype the same password'}),
                                 error_messages={
-                                    'required': 'Please enter a password with Capital letters, small letters and numbers'})
+                                    'required': 'Please enter a password with Capital letters, small letters and '
+                                                'numbers'})
 
     # def clean_email(self, *args, **kwargs):
     #     email = self.cleaned_data['email']

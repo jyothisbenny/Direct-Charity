@@ -6,7 +6,7 @@
     <li class="list-group-item"><img src="{{ i.patient.patient_photo.url }}" width="400" height="250"></br>
 
         {{i.patient.patient_name}} hase been reported by {{i.patient.report_count}} users, you payed
-        {{i.amount}}Rs for this user to view more details <a href="#">click here</a>
+        {{i.amount}}Rs for this user to view more details <a href="{% url 'request_readMore_url' i.patient.id %}">click here</a>
     </li>
 </ul>
 {% endfor %}

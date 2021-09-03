@@ -94,7 +94,7 @@ def user_home(request):
     patients = Patient.objects.all()
     for i in patients:
         if i.collected_amount >= i.required_amount:
-            print("-------------------------how you doing")
+
             SuccessStories.objects.create(owner=i.owner, patient_name=i.patient_name, relationship=i.relationship,
                                           patient_photo=i.patient_photo, disease=i.disease, category=i.category,
                                           description=i.description, documents=i.documents, hospital=i.hospital,
@@ -103,6 +103,6 @@ def user_home(request):
                                           report_count=i.report_count)
             i.delete()
 
-    User_requests = Patient.objects.filter(admin_verified=True).filter(report_count__lte=18)
-    print(type(User_requests))
-    return render(request, 'User/UserHome.html', {'user_requests': User_requests})
+    user_requests = Patient.objects.filter(admin_verified=True).filter(report_count__lte=18)
+    print(type(user_requests))
+    return render(request, 'User/UserHome.html', {'user_requests': user_requests})
