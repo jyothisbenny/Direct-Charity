@@ -132,19 +132,38 @@ def notifications(request):
 
 def listPaymentsForApprove(request):
     dict1 = {}
-    """getting patient requests made by the login ed user"""
+    """getting patient requests made by the login user"""
     pat = Patient.objects.filter(owner=request.user.id)
-    for i in pat:
-        """getting all the payments are made for the patients"""
-        pay = Payment.objects.filter(patient_id=i.id)
-        for j in pay:
-            print("------------------------hey-------", j)
-            print("-----------------hello----------------")
-            dict1[i] = j
-    # print("$$$$$$$$$$$$$$$$$$$$$$", pat)
+    if pat:
+        for i in pat:
+            """getting all the payments are made for the patient"""
+        pay = Payment.objects.filter(patient_id=i.id).filter(user_verified=False)
+        if pay:
+            for j in pay:
+                dict1[j] = i
+        return render(request, "Patients/ListPayment.html", {'payments': dict1})
 
-    print("++++++++++", dict1)
-    return render(request, "Patients/ListPayment.html", {'payments': dict1})
+
+def paymentSuccessful(request, id):
+    pay = Payment.objects.get(pk=id)
+    pay.user_verified = True
+    pay.is_successful = True
+    pay.save()
+    messages.success(request, 'marker as successful')
+    return redirect('list_payment_url')
+
+
+def paymentNotSuccessful(request, id):
+    pay = Payment.objects.get(pk=id)
+    pay.user_verified = True
+    pay.save()
+    patients = Patient.objects.get(pk=pay.patient_id)
+    print("--------", patients.collected_amount)
+    patients.collected_amount = patients.collected_amount - pay.amount
+    print("--------", patients.collected_amount)
+    patients.save()
+    messages.success(request, 'marker as unsuccessful')
+    return redirect('list_payment_url')
 
 
 def successStories(request):

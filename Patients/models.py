@@ -63,6 +63,7 @@ class Payment(models.Model):
     screenshot = models.FileField(upload_to='PaymentProofs/%Y/%m/%d', validators=[validate_file_extension_of_pic])
     admin_verified = models.BooleanField(default=False)
     user_verified = models.BooleanField(default=False)
+    is_successful = models.BooleanField(default=False)
 
 
 class Report(models.Model):

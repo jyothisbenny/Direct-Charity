@@ -1,15 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        </br></br>
+        {% for i in payments %}
+        <div class="form-row">
+            <div class="col-md-8 mb-8">For {{i.patient}} -- {{i.amount}} is paid by {{i.donor}}
+                </br> To view the transaction details
+                <a href="{{i.screenshot.url}}">Click here</a></p>
+            </div>
 
-{% for i in payments%}
-<ul class="list-group list-group-flush">
-    {{i.patient_name}}
-    {{i.paymet.amount}}
-<!--    {% for j in i %}-->
-<!--    {{i.patient_name}}{{j.amount}}-->
-<!--    {% endfor %}-->
-    </li>
-</ul>
-{% endfor %}
-
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'payment_unsuccessful_url' i.id %}"
+                        class="btn btn-danger btn-sm">Not Success</a>
+                <a href="{% url 'payment_successful_url' i.id %}"
+                        class="btn btn-success btn-sm">Success</a>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+    <div>
+            </br>
+            <h4>
+                {% for message in messages %}
+                {% if message%}
+                {{ message }}
+                <h5><a class="nav-link" href="{% url 'user_home_url' %}">Go Back to Home</a></h5>
+                {% endif%}
+                {% endfor %}
+            </h4>
+        </div>
+</div>
 {% endblock %}
